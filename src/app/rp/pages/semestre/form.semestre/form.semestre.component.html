@@ -1,0 +1,34 @@
+<div class="fixed top-0 right-0 flex flex-col justify-center w-1/2 h-screen p-12 bg-white">
+  <button (click)="closeForm()"
+    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 left-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
+    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd"
+        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+        clip-rule="evenodd"></path>
+    </svg>
+    <span class="sr-only">Close menu</span>
+  </button>
+  <form #formSemestre="ngForm" (ngSubmit)="formSemestre.form.valid">
+    <div class="">
+      <div class="mb-6">
+        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Libelle</label>
+        <input type="text" id="error" [ngClass]="{
+            'text-sm rounded-lg w-full p-2.5 block' : true,
+            'bg-red-50 border border-red-500 text-red-900 placeholder-red-700  focus:ring-red-500 dark:bg-gray-700 focus:border-red-500   dark:text-red-500 dark:placeholder-red-500 dark:border-red-500':libelle.errors && (libelle.dirty || libelle.touched)
+          }" placeholder="entrer le libelle" [(ngModel)]="semestreSelect.libelle" name="libelle" required
+          #libelle="ngModel">
+        @if (libelle.errors && (libelle.dirty || libelle.touched)) {
+        <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">le libelle</span> est
+          obligatoire.</p>
+        }
+      </div>
+      <div class="">
+        <button type="button"
+          (click)="closeForm()"
+          (click)="onSubmit()"
+          [disabled]="formSemestre.form.invalid"
+          class="float-right inline-block rounded disabled:bg-slate-400 hover:bg-orange-600 text-neutral-50 shadow-[0_4px_9px_-4px_rgba(51,45,45,0.7)]  hover:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] focus:bg-blue-800 focus:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] active:bg-blue-700 active:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] px-6 pb-2 pt-2.5  bg-orange-500 text-xs font-medium uppercase leading-normal transition duration-150 ease-in-out focus:outline-none focus:ring-0">enregistrer</button>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,117 @@
+<section class="w-1/2 mx-auto">
+  <h1 class="my-2 text-3xl text-black">formulaire d'ajout de cour</h1>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="nbrHeure"
+        [ngClass]="{ 'text-red-500': form.controls['nbrHeure'].errors && (form.controls['nbrHeure'].dirty || form.controls['nbrHeure'].touched) }">nombre
+        heure</label>
+      <input formControlName="nbrHeure" type="number" id="nbrHeure" name="nbrHeure"
+        [ngClass]="form.controls['nbrHeure'].errors && (form.controls['nbrHeure'].dirty || form.controls['nbrHeure'].touched) ? 'bg-red-50 bord1er border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 dark:bg-gray-700 focus:border-red-500 block w-full p-2.5 dark:text-red-500 dark:placeholder-red-500 dark:border-red-500': 'block w-full p-2 mb-6 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'">
+      @if (form.controls["nbrHeure"].errors && (form.controls["nbrHeure"].dirty || form.controls["nbrHeure"].touched)) {
+      <p class="mb-6 text-sm text-red-600 dark:text-red-500"><span class="font-medium">le nombre d'heure</span> doit
+        etre supperieur ou egale a 4h !</p>
+      }
+    </div>
+    <div class="">
+      <label for="professeur"
+        [ngClass]="{ 'text-red-500': form.controls['professeur'].errors && (form.controls['professeur'].dirty || form.controls['professeur'].touched )}">professeur</label>
+      <div class="flex w-full">
+        <div class="w-1/4">
+          <input placeholder="search..." formControlName="prof" (keyup)="onProfSearch()"
+            class="'block w-full p-2 mb-6 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'"
+            type="text">
+        </div>
+        <div class="w-3/4">
+          <ng-select id="professeur"  name="professeur"
+            [ngClass]="form.controls['professeur'].errors && (form.controls['professeur'].dirty || form.controls['professeur'].touched) ? 'bg-red-50 bord1er border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 dark:bg-gray-700 focus:border-red-500 block w-full dark:text-red-500 dark:placeholder-red-500 dark:border-red-500': 'block w-full mb-6 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'"
+            formControlName="professeur">
+            <ng-option *ngFor="let prof of professeurs" [value]="[prof.id,prof.nomComplet]">{{prof.nomComplet}}</ng-option>
+          </ng-select>
+          @if (form.controls["professeur"].errors && (form.controls["professeur"].dirty ||
+          form.controls["professeur"].touched)) {
+          <p class="mb-6 text-sm text-red-600 dark:text-red-500"><span class="font-medium">le professeur</span> est
+            obligatoire.</p>
+          }
+        </div>
+      </div>
+    </div>
+
+    <div class="">
+      <label for="module"
+        [ngClass]="{ 'text-red-500': form.controls['module'].errors && form.controls['module'].dirty && form.controls['module'].touched }">module</label>
+      <div class="flex w-full">
+        <div class="w-1/4">
+          <input placeholder="search..." formControlName="mod" (keyup)="onModSearch()"
+            class="'block w-full p-2 mb-6 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'"
+            type="text">
+        </div>
+        <div class="w-3/4">
+          <ng-select id="module" name="module"
+            [ngClass]="form.controls['module'].errors && (form.controls['module'].dirty || form.controls['module'].touched) ? 'bg-red-50 bord1er border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 dark:bg-gray-700 focus:border-red-500 block w-full dark:text-red-500 dark:placeholder-red-500 dark:border-red-500': 'block w-full mb-6 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'"
+            formControlName="module">
+            <ng-option *ngFor="let mod of modules" [value]="[mod.id,mod.libelle]">{{mod.libelle}}</ng-option>
+          </ng-select>
+          @if (form.controls["module"].errors && (form.controls["module"].dirty ||
+          form.controls["module"].touched)) {
+          <p class="mb-6 text-sm text-red-600 dark:text-red-500"><span class="font-medium">le module</span> est
+            obligatoire.</p>
+          }
+        </div>
+      </div>
+    </div>
+
+    <div class="">
+      <label for="semestre"
+        [ngClass]="{ 'text-red-500': form.controls['semestre'].errors && form.controls['semestre'].dirty && form.controls['semestre'].touched }">semestre</label>
+      <div class="flex w-full">
+        <div class="w-1/4">
+          <input placeholder="search..." formControlName="sem" (keyup)="onSemSearch()"
+            class="'block w-full p-2 mb-6 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'"
+            type="text">
+        </div>
+        <div class="w-3/4">
+          <ng-select id="semestre" name="semestre"
+            [ngClass]="form.controls['semestre'].errors && (form.controls['semestre'].dirty || form.controls['semestre'].touched) ? 'bg-red-50 bord1er border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 dark:bg-gray-700 focus:border-red-500 block w-full dark:text-red-500 dark:placeholder-red-500 dark:border-red-500': 'block w-full mb-6 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'"
+            formControlName="semestre">
+            <ng-option *ngFor="let sem of semestres" [value]="[sem.id,sem.libelle]">{{sem.libelle}}</ng-option>
+          </ng-select>
+          @if (form.controls["semestre"].errors && (form.controls["semestre"].dirty ||
+          form.controls["semestre"].touched)) {
+          <p class="mb-6 text-sm text-red-600 dark:text-red-500"><span class="font-medium">le semestre</span> est
+            obligatoire.</p>
+          }
+        </div>
+
+      </div>
+    </div>
+    <div class="">
+      <label for="classes"
+        [ngClass]="{ 'text-red-500': form.controls['classes'].errors && form.controls['classes'].dirty && form.controls['classes'].touched }">classes</label>
+      <div class="flex w-full">
+        <div class="w-1/4">
+          <input placeholder="search..." formControlName="Clas" (keyup)="onClasseSearch()"
+            class="'block w-full p-2 mb-6 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'"
+            type="text">
+        </div>
+        <div class="w-3/4">
+          <ng-select id="classes" name="classes" [multiple]="true" [closeOnSelect]="false"
+            [ngClass]="form.controls['classes'].errors && (form.controls['classes'].dirty || form.controls['classes'].touched) ? 'bg-red-50 bord1er border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 dark:bg-gray-700 focus:border-red-500 block w-full dark:text-red-500 dark:placeholder-red-500 dark:border-red-500': 'block w-full mb-6 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'"
+            formControlName="classes">
+            <ng-option *ngFor="let clas of classesSelect" [value]="[clas.id,clas.libelle]">{{clas.libelle}}</ng-option>
+          </ng-select>
+          @if (form.controls["classes"].errors && (form.controls["classes"].dirty ||
+          form.controls["classes"].touched)) {
+          <p class="mb-6 text-sm text-red-600 dark:text-red-500"><span class="font-medium">les classes</span> sont
+            obligatoire.</p>
+          }
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <input [disabled]="form.invalid"
+        class="float-right inline-block rounded bg-orange-800 text-neutral-50 shadow-[0_4px_9px_-4px_rgba(51,45,45,0.7)] hover:bg-orange-800 hover:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] focus:bg-black focus:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] active:bg-black active:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal transition duration-150 ease-in-out focus:outline-none focus:ring-0"
+        type="submit" value="enregistrer">
+    </div>
+  </form>
+</section>
