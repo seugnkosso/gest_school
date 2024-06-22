@@ -1,0 +1,67 @@
+<div class="flex justify-between mb-3">
+  <div class="">
+    <div class="flex gap-2">
+      <input
+        id="inputSearch"
+        type="date"
+        #dateDebut
+        (change)="OnDebutChange(dateDebut.value)"
+        placeholder="Search..."
+        class="block w-64 py-2 pl-10 pr-4 text-sm border rounded-lg dark:border-none dark:bg-neutral-600 focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-400"
+      />
+      <input
+        id="inputSearch"
+        type="date"
+        #dateFin
+        (change)="OnFinChange(dateFin.value)"
+        placeholder="Search..."
+        class="block w-64 py-2 pl-10 pr-4 text-sm border rounded-lg dark:border-none dark:bg-neutral-600 focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-400"
+      />
+    </div>
+  </div>
+  <div class="">
+    @if(idUser == null){
+    <a
+      role="button"
+      (click)="openForm()"
+      class="inline-block rounded bg-orange-400 text-neutral-50 shadow-[0_4px_9px_-4px_rgba(51,45,45,0.7)] hover:bg-orange-800 hover:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] focus:bg-black focus:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] active:bg-black active:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal transition duration-150 ease-in-out focus:outline-none focus:ring-0"
+      >nouveau</a
+    >
+    }
+  </div>
+</div>
+
+<!-- Table -->
+<table class="min-w-full text-sm text-left whitespace-nowrap">
+  <!-- Table head -->
+  <thead class="tracking-wider uppercase bg-orange-400 dark:bg-neutral-800">
+    <tr>
+      <th scope="col" class="px-6 py-4">date</th>
+      <th scope="col" class="px-6 py-4">heure debut et fin</th>
+      <th scope="col" class="px-6 py-4">salle</th>
+      <th scope="col" class="px-6 py-4">etat</th>
+      <th scope="col" class="px-6 py-4 text-right"></th>
+    </tr>
+  </thead>
+
+  <!-- Table body -->
+  <tbody>
+    @for (item of results; track $index) {
+    <tr class="hover:bg-neutral-100 dark:hover:bg-neutral-600">
+      <td class="px-6 py-4">{{ item.date }}</td>
+      <td class="px-6 py-4">{{ item.heureDebutFin }}</td>
+      <td class="px-6 py-4">{{ item.salle }}</td>
+      <td class="px-6 py-4">{{ item.etat }}</td>
+      <td class="flex justify-end gap-2 px-6 py-4">
+        @if (idUser != null) {
+        <a
+          role="button"
+          class="inline-block rounded bg-orange-500 text-neutral-50 shadow-[0_4px_9px_-4px_rgba(51,45,45,0.7)] hover:bg-orange-600 hover:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] focus:bg-orange-800 focus:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] active:bg-orange-700 active:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal transition duration-150 ease-in-out focus:outline-none focus:ring-0"
+          >demande annulation</a
+        >
+        }
+      </td>
+    </tr>
+    }
+  </tbody>
+</table>

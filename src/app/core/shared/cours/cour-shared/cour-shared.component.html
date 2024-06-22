@@ -1,0 +1,93 @@
+<div class="overflow-x-auto bg-white dark:bg-neutral-700">
+  <!-- Search input -->
+  <div class="flex justify-between">
+    <div class="flex">
+      <div class="relative m-[2px] mb-3 mr-5 float-left">
+        <label for="inputSearch" class="sr-only">Search </label>
+        <input
+          id="inputSearch"
+          type="text"
+          #telephone
+          (keyup)="search(telephone.value)"
+          placeholder="Search..."
+          class="block w-64 py-2 pl-10 pr-4 text-sm border rounded-lg dark:border-none dark:bg-neutral-600 focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-400"
+        />
+        <span
+          class="absolute transform -translate-y-1/2 pointer-events-none left-3 top-1/2"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-4 h-4 text-neutral-500 dark:text-neutral-200"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+            />
+          </svg>
+        </span>
+      </div>
+    </div>
+    <div class="">
+      @if (idProf == null) {
+      <a
+        role="button"
+        (click)="openClose()"
+        class="inline-block rounded bg-orange-400 text-neutral-50 shadow-[0_4px_9px_-4px_rgba(51,45,45,0.7)] hover:bg-orange-800 hover:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] focus:bg-black focus:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] active:bg-black active:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal transition duration-150 ease-in-out focus:outline-none focus:ring-0"
+        >nouveau</a
+      >
+      }
+    </div>
+  </div>
+
+  <!-- Table -->
+  <table class="min-w-full text-sm text-left whitespace-nowrap">
+    <!-- Table head -->
+    <thead class="tracking-wider uppercase bg-orange-400 dark:bg-neutral-800">
+      <tr>
+        <th scope="col" class="px-6 py-4">classes</th>
+        <th scope="col" class="px-6 py-4">professeur</th>
+        <th scope="col" class="px-6 py-4">module</th>
+        <th scope="col" class="px-6 py-4">semestre</th>
+        <th scope="col" class="px-6 py-4">nombre heure</th>
+        <th scope="col" class="px-6 py-4 text-right"></th>
+      </tr>
+    </thead>
+
+    <!-- Table body -->
+    <tbody>
+      @for (item of results; track $index) {
+      <tr class="hover:bg-neutral-100 dark:hover:bg-neutral-600">
+        <th scope="row" class="px-6 py-4">{{ item.listeClasse }}</th>
+        <td class="px-6 py-4">{{ item.professeur }}</td>
+        <td class="px-6 py-4">{{ item.module }}</td>
+        <td class="px-6 py-4">{{ item.semestre }}</td>
+        <td class="px-6 py-4">{{ item.nbrHeure }}</td>
+        <td class="flex justify-end gap-2 px-6 py-4">
+          @if (idProf != null) {
+          <a
+            role="button"
+            routerLink="/professeur/sessionCours/cour/{{ item.id }}/{{
+              idProf
+            }}"
+            class="inline-block rounded bg-orange-500 text-neutral-50 shadow-[0_4px_9px_-4px_rgba(51,45,45,0.7)] hover:bg-orange-600 hover:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] focus:bg-orange-800 focus:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] active:bg-orange-700 active:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal transition duration-150 ease-in-out focus:outline-none focus:ring-0"
+            >session</a
+          >
+          } @if (idProf == null) {
+          <a
+            role="button"
+            routerLink="/RP/sessionCours/cour/{{ item.id }}"
+            class="inline-block rounded bg-orange-500 text-neutral-50 shadow-[0_4px_9px_-4px_rgba(51,45,45,0.7)] hover:bg-orange-600 hover:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] focus:bg-orange-800 focus:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] active:bg-orange-700 active:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal transition duration-150 ease-in-out focus:outline-none focus:ring-0"
+            >session</a
+          >
+          }
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</div>

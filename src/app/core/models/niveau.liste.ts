@@ -11,8 +11,7 @@ export interface NiveauListe {
 }
 
 export interface NiveauSelect {
-  id?: number;
-  libelle?: string;
+  id?: null;
+  libelle?: null;
 }
-
 

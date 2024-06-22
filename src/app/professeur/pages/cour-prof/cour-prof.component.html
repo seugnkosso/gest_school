@@ -1,0 +1,8 @@
+<app-cour-shared
+  [results]="reponse?.results"
+  (OnSearch)="search($event)"
+></app-cour-shared>
+<app-pagination
+  [data]="dataPagination"
+  (OnGetNumberPage)="paginate($event)"
+></app-pagination>

@@ -26,14 +26,13 @@ import { NiveauServiceImpl } from '../../../../core/services/impl/niveau.service
   styleUrl: './form-classe.component.css',
 })
 export class FormClasseComponent {
-
   @Output() onCloseForm: EventEmitter<any> = new EventEmitter();
   FilieresSelect: FiliereSelect[] = [];
   niveauSelect: NiveauSelect[] = [];
   anneeScolaireSelect: AnneeScolaireSelect[] = [];
   attacherSelect: AttacherSelect[] = [];
   form = this.fb.group({
-    libelle: [null, [Validators.required]],
+    libelle: ['', [Validators.required]],
     searchAttacher: ['', []],
     attacher: [null, [Validators.required]],
     searchFiliere: ['', []],
@@ -50,8 +49,79 @@ export class FormClasseComponent {
     private anneeService: AnneeScolaireServiceImpl,
     private attacherService: AttacherServiceImpl,
     private classeService: ClasseServiceImpl,
-    private router:Router
+    private router: Router
   ) {}
+  onChargeLibelle() {
+    if (localStorage.getItem('lib') != undefined) {
+      localStorage.removeItem('lib');
+    }
+    if (
+      this.form.controls['filiere'].value![1] != null &&
+      this.form.controls['niveau'].value![1] != null
+    ) {
+      const Alphabet = [
+        'A',
+        'B',
+        'C',
+        'D',
+        'E',
+        'F',
+        'G',
+        'H',
+        'I',
+        'J',
+        'K',
+        'L',
+        'M',
+        'N',
+        'O',
+        'P',
+        'Q',
+        'R',
+        'S',
+        'T',
+        'U',
+        'V',
+        'W',
+        'X',
+        'Y',
+        'Z',
+      ];
+      for (let index = 0; index < Alphabet.length; index++) {
+        this.classeService
+          .findByLibelle(
+            this.form.controls['filiere'].value![1] +
+              '' +
+              this.form.controls['niveau'].value![1] +
+              '' +
+              Alphabet[index]
+          )
+          .subscribe((data) => {
+            if (data.results != null) {
+              this.form.controls['libelle'].setValue(
+                this.form.controls['filiere'].value![1] +
+                  '' +
+                  this.form.controls['niveau'].value![1] +
+                  '' +
+                  Alphabet[index + 1]
+              );
+              localStorage.setItem('lib', 'ok');
+            }
+          });
+        if (localStorage.getItem('lib') != undefined) {
+          break;
+        }
+      }
+      if (localStorage.getItem('lib') == undefined) {
+        this.form.controls['libelle'].setValue(
+          this.form.controls['filiere'].value![1] +
+            '' +
+            this.form.controls['niveau'].value![1] +
+            'A'
+        );
+      }
+    }
+  }
 
   searchAttacher() {
     const searchAttacher = this.form.controls['searchAttacher'].value;
@@ -60,7 +130,7 @@ export class FormClasseComponent {
         .findAllSelect(searchAttacher)
         .subscribe((data) => (this.attacherSelect = data.results));
     }
-    }
+  }
   searchAnneeScolaire() {
     const searchAnnee = this.form.controls['searchAnnee'].value;
     if (searchAnnee != null && searchAnnee.length >= 4) {
@@ -85,15 +155,21 @@ export class FormClasseComponent {
         .subscribe((data) => (this.FilieresSelect = data.results));
     }
   }
+
   onSubmit() {
-    const classeCreate = this.form.value
-    this.classeService.creat(classeCreate).subscribe(data => {
+    this.form.controls['filiere'].setValue(
+      this.form.controls['filiere'].value![0]
+    );
+    this.form.controls['niveau'].setValue(
+      this.form.controls['niveau'].value![0]
+    );
+    const classeCreate = this.form.value;
+    this.classeService.creat(classeCreate).subscribe((data) => {
       this.closeForm();
-      this.router.navigateByUrl('/',{skipLocationChange:true}).then(() => {
+      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
         this.router.navigate(['/RP/classes']);
       });
     });
-
   }
 
   closeForm() {

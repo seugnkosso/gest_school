@@ -3,11 +3,14 @@
   <div class="overflow-x-auto bg-white dark:bg-neutral-700">
     <!-- Search input -->
     <div class="flex justify-between">
-      <div class="relative m-[2px] mb-3 mr-5 float-left">
-      </div>
+      <div class="relative m-[2px] mb-3 mr-5 float-left"></div>
       <div class="mb-3">
-        <a role="button" (click)="openFormClasses()"
-          class="inline-block rounded bg-orange-400 text-neutral-50 shadow-[0_4px_9px_-4px_rgba(51,45,45,0.7)] hover:bg-orange-800 hover:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] focus:bg-black focus:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] active:bg-black active:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal transition duration-150 ease-in-out focus:outline-none focus:ring-0">nouveau</a>
+        <a
+          role="button"
+          (click)="openFormClasses()"
+          class="inline-block rounded bg-orange-400 text-neutral-50 shadow-[0_4px_9px_-4px_rgba(51,45,45,0.7)] hover:bg-orange-800 hover:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] focus:bg-black focus:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] active:bg-black active:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal transition duration-150 ease-in-out focus:outline-none focus:ring-0"
+          >nouveau</a
+        >
       </div>
     </div>
 
@@ -34,19 +37,21 @@
           <td class="px-6 py-4">{{ item.filiere }}</td>
           <td class="px-6 py-4">{{ item.niveau }}</td>
           <td class="px-6 py-4">{{ item.anneeScolaire }}</td>
-          <td class="flex justify-end gap-2 px-6 py-4">
-            <a role="button"
-              class="inline-block rounded bg-orange-500 text-neutral-50 shadow-[0_4px_9px_-4px_rgba(51,45,45,0.7)] hover:bg-orange-600 hover:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] focus:bg-orange-800 focus:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] active:bg-orange-700 active:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal transition duration-150 ease-in-out focus:outline-none focus:ring-0">cours</a>
-          </td>
+          <td class="flex justify-end gap-2 px-6 py-4"></td>
         </tr>
         }
       </tbody>
     </table>
-    <app-pagination [data]="dataPagination" (OnGetNumberPage)="paginate($event)"></app-pagination>
-    <div [ngClass]="{
-      'transition-transform': true,
-      '-translate-x-full': isformClosed
-    }">
+    <app-pagination
+      [data]="dataPagination"
+      (OnGetNumberPage)="paginate($event)"
+    ></app-pagination>
+    <div
+      [ngClass]="{
+        'transition-transform': true,
+        '-translate-x-full': isformClosed
+      }"
+    >
       <app-form-classe (onCloseForm)="closeFormClasse()"></app-form-classe>
     </div>
   </div>

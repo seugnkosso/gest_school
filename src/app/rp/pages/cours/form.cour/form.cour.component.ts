@@ -1,56 +1,62 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import {
   FormBuilder,
   FormsModule,
   ReactiveFormsModule,
-  Validators
+  Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ModuleSelect } from '../../../../core/models/Module.liste';
 import { ProfesseurSelect } from '../../../../core/models/Professeur.liste';
 import { ClasseSelect } from '../../../../core/models/classe.liste';
 import { SemestreSelect } from '../../../../core/models/semestre.liste';
 import { ClasseServiceImpl } from '../../../../core/services/impl/classe.service.impl';
+import { CourServiceImpl } from '../../../../core/services/impl/cour.service.impl';
 import { ModuleServiceImpl } from '../../../../core/services/impl/module.service.impl';
 import { ProfesseurServiceImpl } from '../../../../core/services/impl/professeur.service.imp';
 import { SemestreServiceImpl } from '../../../../core/services/impl/semestre.service.impl';
 
 
 @Component({
-  selector: 'app-form.cour',
+  selector: 'app-form-cour',
   templateUrl: './form.cour.component.html',
-  standalone:true,
-  imports:[CommonModule,ReactiveFormsModule,NgSelectModule,FormsModule],
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule, NgSelectModule, FormsModule],
   styleUrl: './form.cour.component.css',
 })
 export class FormCourComponent implements OnInit {
-
   professeurs?: ProfesseurSelect[];
   modules?: ModuleSelect[];
   semestres?: SemestreSelect[];
-  classesSelect? : ClasseSelect[];
+  classesSelect?: ClasseSelect[];
 
   form = this.fb.group({
-    nbrHeure: [null,Validators.required, Validators.min(4)],
+    nbrHeure: [null, Validators.required, Validators.min(4)],
     prof: [''],
     professeur: [null, Validators.required],
     mod: [''],
     module: [null, Validators.required],
     sem: [''],
     semestre: [null, Validators.required],
-    Clas:[''],
+    Clas: [''],
     classes: [null, Validators.required],
   });
+  @Output() onCloseForm : EventEmitter<any> = new EventEmitter()
   constructor(
     private fb: FormBuilder,
     private professeurService: ProfesseurServiceImpl,
     private moduleService: ModuleServiceImpl,
     private semestreService: SemestreServiceImpl,
-    private classeService: ClasseServiceImpl
+    private classeService: ClasseServiceImpl,
+    private courService: CourServiceImpl,
+    private router: Router
   ) {}
   ngOnInit(): void {}
-
+  closeForm() {
+    this.onCloseForm.emit()
+  }
   onProfSearch() {
     const prof = this.form.controls['prof'].value;
     if (prof != null) {
@@ -95,6 +101,12 @@ export class FormCourComponent implements OnInit {
     }
   }
   onSubmit() {
-    console.log(this.form.value);
+    const courCreat = this.form.value
+    this.courService.create(courCreat).subscribe(data => {
+      this.closeForm()
+      this.router.navigateByUrl('/',{skipLocationChange:true}).then(() => {
+        this.router.navigate(['/RP/cours'])
+      })
+    })
   }
 }

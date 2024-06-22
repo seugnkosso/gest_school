@@ -11,8 +11,8 @@ export interface FiliereListe {
 }
 
 export interface FiliereSelect {
-  id?: number;
-  libelle: string;
+  id?: null;
+  libelle?: string | null;
 }
 
 

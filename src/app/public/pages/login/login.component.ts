@@ -6,7 +6,6 @@ import { RestResponse } from '../../../core/models/rest.response';
 import { AuthentificateService } from '../../../core/services/auth/authentificate.service';
 import { IdentifyService } from '../../../core/services/auth/identify.service';
 
-
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -29,7 +28,13 @@ export class LoginComponent {
   }
 
   ngOnInit(): void {
-
+    if (localStorage.getItem('role') === 'RP') {
+      this.router.navigateByUrl('/RP/cours');
+    } else {
+      this.router.navigateByUrl(
+        '/Professeurs/cours/' + localStorage.getItem('idUser')
+      );
+    }
   }
 
   onSubmit() {
@@ -40,8 +45,17 @@ export class LoginComponent {
         if (res.status == 200) {
           localStorage.setItem('connecter', 'true');
           localStorage.setItem('token', res.results.token);
-          localStorage.setItem('role',this.identifyS.identified(res.results.roles))
-          this.router.navigateByUrl('/RP/cours');
+          localStorage.setItem(
+            'role',
+            this.identifyS.identified(res.results.roles)
+          );
+          localStorage.setItem('idUser', '' + res.results.id);
+          if (res.results.roles.indexOf('RP') != -1) {
+            this.router.navigateByUrl('/RP/cours');
+          }
+          if (res.results.roles.indexOf('Professeur') != -1) {
+            this.router.navigateByUrl('/professeur/cours/' + res.results.id);
+          }
         } else {
           console.log('Error');
         }

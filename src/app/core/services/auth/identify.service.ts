@@ -12,6 +12,9 @@ export class IdentifyService {
     if (tab.indexOf('RP') != -1) {
       return Role.RP;
     }
+    if (tab.indexOf('Professeur') != -1) {
+      return Role.Professeur;
+    }
     return 'null';
   }
   getRoleConnecter() {
@@ -22,6 +25,13 @@ export class IdentifyService {
     return (
       this.authservice.authentification() == true &&
       this.getRoleConnecter() == Role.RP
+    );
+  }
+
+  ProfesseurIsIdentified() {
+    return (
+      this.authservice.authentification() == true &&
+      this.getRoleConnecter() == Role.Professeur
     );
   }
 }

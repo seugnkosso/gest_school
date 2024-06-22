@@ -5,4 +5,5 @@ import { SpecialiteSelect } from '../models/specialte.liste';
 export interface SpecialiteService {
   findAllSelect(libelle:string): Observable<RestResponse<SpecialiteSelect[]>> ;
   findAll(page:number): Observable<RestResponse<SpecialiteSelect[]>> ;
+  create(specialiteSelect:SpecialiteSelect): Observable<RestResponse<SpecialiteSelect>> ;
 }

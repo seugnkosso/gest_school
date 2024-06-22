@@ -12,6 +12,11 @@ import { SalleService } from '../salle.service';
 export class SalleServiceImpl implements SalleService {
   private apiUrl = `${environment.APIURL}/Salles`;
   constructor(private http: HttpClient) {}
+  findAllBylibelle(libelle:string,heureDebut:string,heureFin:string,date:string): Observable<RestResponse<SalleListe[]>> {
+    return this.http.get<RestResponse<SalleListe[]>>(
+      `${this.apiUrl}/libelle/${heureDebut}/${heureFin}/${date}?libelle=${libelle}`
+    );
+  }
   create(creatSalle: CreatSalle): Observable<RestResponse<CreatSalle>> {
     return this.http.post<RestResponse<CreatSalle>>(this.apiUrl, creatSalle)
   }

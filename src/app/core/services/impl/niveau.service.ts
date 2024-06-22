@@ -13,6 +13,12 @@ export class NiveauServiceImpl implements NiveauService {
 
   apiUrl = `${environment.APIURL}/niveaux`;
   constructor(private http:HttpClient) { }
+  create(niveauSelect: NiveauSelect): Observable<RestResponse<NiveauSelect>> {
+    return this.http.post<RestResponse<NiveauSelect>>(`${this.apiUrl}`,niveauSelect);
+  }
+  findAll(page: number): Observable<RestResponse<NiveauSelect[]>> {
+    return this.http.get<RestResponse<NiveauSelect[]>>(`${this.apiUrl}?page=${page}`);
+  }
 
   findAllSelect(libelle: string): Observable<RestResponse<NiveauSelect[]>> {
     return this.http.get<RestResponse<NiveauSelect[]>>(`${this.apiUrl}/libelle/${libelle}`);

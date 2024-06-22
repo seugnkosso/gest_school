@@ -13,6 +13,12 @@ export class FiliereServiceImpl implements FiliereService {
 
   apiUrl = `${environment.APIURL}/filieres`;
   constructor(private http:HttpClient) { }
+  create(filiereSelect: FiliereSelect): Observable<RestResponse<FiliereSelect>> {
+    return this.http.post<RestResponse<FiliereSelect>>(`${this.apiUrl}`,filiereSelect);
+  }
+  findAll(page: number = 0): Observable<RestResponse<FiliereSelect[]>> {
+    return this.http.get<RestResponse<FiliereSelect[]>>(`${this.apiUrl}?page=${page}`);
+  }
 
   findAllSelect(libelle: string): Observable<RestResponse<FiliereSelect[]>> {
     return this.http.get<RestResponse<FiliereSelect[]>>(`${this.apiUrl}/libelle/${libelle}`);

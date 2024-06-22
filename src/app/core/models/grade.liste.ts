@@ -10,6 +10,6 @@ export interface GradeListe {
 }
 
 export interface GradeSelect {
-  id: number;
-  libelle: string;
+  id?: null;
+  libelle?: null;
 }

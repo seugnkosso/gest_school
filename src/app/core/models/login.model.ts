@@ -1,10 +1,10 @@
 export interface TokenResponse {
-    token:string
-    roles:String[]
+  id?: number;
+  token: string;
+  roles: String[];
 }
 
 export interface AuthentificationRequest {
-    username:string
-    password:string
+  username?: string;
+  password?: string;
 }
-

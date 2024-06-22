@@ -12,18 +12,24 @@ import { CourService } from '../cour.service';
 export class CourServiceImpl implements CourService {
   private apiUrl = `${environment.APIURL}/cours`;
   constructor(private http: HttpClient) {}
-  create(creatCour: CreatCour): Observable<RestResponse<CreatCour>> {
-    return this.http.post<RestResponse<CreatCour>>(
-      `${this.apiUrl}`,
-      creatCour
+  findallByProfId(
+    page: number,
+    idprof: string,
+    tel: string = ''
+  ): Observable<RestResponse<CourListe[]>> {
+    return this.http.get<RestResponse<CourListe[]>>(
+      `${this.apiUrl}/professeur?idProf=${idprof}&page=${page}&tel=${tel}`
     );
+  }
+  create(creatCour: CreatCour): Observable<RestResponse<CreatCour>> {
+    return this.http.post<RestResponse<CreatCour>>(`${this.apiUrl}`, creatCour);
   }
   findall(
     page: number = 0,
     telephone: string = ''
   ): Observable<RestResponse<CourListe[]>> {
     return this.http.get<RestResponse<CourListe[]>>(
-      `${this.apiUrl}?page=${page}&telephone=${telephone}`
+      `${this.apiUrl}?page=${page}&tel=${telephone}`
     );
   }
 }

@@ -1,0 +1,28 @@
+<section
+  [ngClass]="{
+    'opacity-20': !isFormClose
+  }"
+>
+  <!-- Table responsive wrapper -->
+  <div class="overflow-x-auto bg-white dark:bg-neutral-700">
+    <!-- Search input -->
+    <app-session-cour-shared
+      [results]="response?.results"
+      (OnOpenForm)="openForm()"
+      (OnDateDebutChange)="dateDebutChange($event)"
+      (OnDateFinChange)="dateFinChange($event)"
+    ></app-session-cour-shared>
+    <app-pagination
+      [data]="dataPagination"
+      (OnGetNumberPage)="paginate($event)"
+    ></app-pagination>
+  </div>
+</section>
+<div
+  [ngClass]="{
+  'transition-transform': true,
+  '-translate-x-full': isFormClose,
+}"
+>
+  <app-form-session-cour (onCloseForm)="closeForm()"></app-form-session-cour>
+</div>

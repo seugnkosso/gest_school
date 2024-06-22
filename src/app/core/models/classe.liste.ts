@@ -12,7 +12,7 @@ export interface ClasseSelect {
   libelle?: string;
 }
 export interface ClasseCreate {
-  libelle?: null;
+  libelle?: string | null;
   searchAttacher?: string | null;
   attacher?: null;
   searchFiliere?: string | null;

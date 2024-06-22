@@ -1,5 +1,5 @@
 
-export interface AttacherListe {
+export interface FiliereListe {
   id?: number;
   nbrHeure: number;
   isValider: boolean;

@@ -12,6 +12,9 @@ import { ClasseService } from '../classe.service';
 export class ClasseServiceImpl implements ClasseService {
   apiUrl = `${environment.APIURL}/classes`
   constructor(private http:HttpClient) { }
+  findByLibelle(libelle: string): Observable<RestResponse<ClasseSelect>> {
+    return this.http.get<RestResponse<ClasseSelect>>(`${this.apiUrl}/Onelibelle/${libelle}`)
+  }
   creat(classeCreate: ClasseCreate): Observable<RestResponse<ClasseCreate>> {
     return this.http.post<RestResponse<ClasseCreate>>(this.apiUrl, classeCreate)
   }

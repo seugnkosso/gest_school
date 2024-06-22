@@ -1,121 +1,251 @@
-<div class="fixed top-0 right-0 flex flex-col justify-center w-1/2 h-screen p-12 bg-white">
-  <button (click)="closeForm()"
-    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 left-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
-    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-      <path fill-rule="evenodd"
+<div
+  class="fixed top-0 right-0 flex flex-col justify-center w-1/2 h-screen p-12 bg-white"
+>
+  <button
+    (click)="closeForm()"
+    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 left-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+  >
+    <svg
+      aria-hidden="true"
+      class="w-5 h-5"
+      fill="currentColor"
+      viewBox="0 0 20 20"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        fill-rule="evenodd"
         d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-        clip-rule="evenodd"></path>
+        clip-rule="evenodd"
+      ></path>
     </svg>
     <span class="sr-only">Close menu</span>
   </button>
-  <form [formGroup]="form" (ngSubmit)="form.valid">
+  <form [formGroup]="form" (ngSubmit)="(form.valid)">
     <div class="">
-      <div class="mb-6">
-        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Libelle</label>
-        <input formControlName="libelle" type="text" id="error" [ngClass]="{
-            'text-sm rounded-lg w-full p-2.5 block' : true,
-            'bg-red-50 border border-red-500 text-red-900 placeholder-red-700  focus:ring-red-500 dark:bg-gray-700 focus:border-red-500   dark:text-red-500 dark:placeholder-red-500 dark:border-red-500':form.controls['libelle'].errors && (form.controls['libelle'].dirty || form.controls['libelle'].touched)
-          }" placeholder="entrer le libelle" name="libelle" required>
-        @if (form.controls['libelle'].errors && (form.controls['libelle'].dirty || form.controls['libelle'].touched)) {
-        <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">le libelle</span> est
-          obligatoire.</p>
-        }
-      </div>
       <div class="w-full mb-6">
         <label for="Filiere">Filiere</label>
         <div class="flex">
-          <input [ngClass]="{
-            'w-1/3  block rounded-lg border dark:border-none dark:bg-neutral-600 py-[3px] px-3 pr-4 text-sm focus:border-blue-400 focus:ring-1 focus:ring-blue-400 focus:outline-none' : true,
-            'bg-red-50 border border-red-500 text-red-900 placeholder-red-700': form.controls['filiere'].errors && (form.controls['filiere'].dirty || form.controls['filiere'].touched)
-          }" type="text" (keyup)="searchFiliere()" placeholder="search..." name="searchFiliere" id=""
+          <input
+            [ngClass]="{
+              'w-1/3  block rounded-lg border dark:border-none dark:bg-neutral-600 py-[3px] px-3 pr-4 text-sm focus:border-blue-400 focus:ring-1 focus:ring-blue-400 focus:outline-none': true,
+              'bg-red-50 border border-red-500 text-red-900 placeholder-red-700':
+                form.controls['filiere'].errors &&
+                (form.controls['filiere'].dirty ||
+                  form.controls['filiere'].touched)
+            }"
+            type="text"
+            (keyup)="searchFiliere()"
+            placeholder="search..."
+            name="searchFiliere"
+            id=""
             formControlName="searchFiliere"
-            class="w-1/3 block rounded-lg border dark:border-none dark:bg-neutral-600 py-[3px] px-3 pr-4 text-sm focus:border-blue-400 focus:ring-1 focus:ring-blue-400 focus:outline-none">
-          <ng-select [ngClass]="{
-            'w-full block rounded-lg border dark:border-none dark:bg-neutral-600 text-sm focus:border-blue-400 focus:ring-1 focus:ring-blue-400 focus:outline-none' : true,
-            'bg-red-50 border border-red-500 text-red-900 placeholder-red-700': form.controls['filiere'].errors && (form.controls['filiere'].dirty || form.controls['filiere'].touched)
-          }" id="filiere" name="filiere"  placeholder="filiere"
-            formControlName="filiere">
-            <ng-option *ngFor="let filiere of FilieresSelect" [value]="filiere.id">{{filiere.libelle}}</ng-option>
+            class="w-1/3 block rounded-lg border dark:border-none dark:bg-neutral-600 py-[3px] px-3 pr-4 text-sm focus:border-blue-400 focus:ring-1 focus:ring-blue-400 focus:outline-none"
+          />
+          <ng-select
+            [ngClass]="{
+              'w-full block rounded-lg border dark:border-none dark:bg-neutral-600 text-sm focus:border-blue-400 focus:ring-1 focus:ring-blue-400 focus:outline-none': true,
+              'bg-red-50 border border-red-500 text-red-900 placeholder-red-700':
+                form.controls['filiere'].errors &&
+                (form.controls['filiere'].dirty ||
+                  form.controls['filiere'].touched)
+            }"
+            id="filiere"
+            name="filiere"
+            placeholder="filiere"
+            formControlName="filiere"
+            (change)="onChargeLibelle()"
+          >
+            <ng-option
+              *ngFor="let filiere of FilieresSelect"
+              [value]="[filiere.id, filiere.libelle]"
+              >{{ filiere.libelle }}</ng-option
+            >
           </ng-select>
         </div>
-        @if (form.controls['filiere'].errors && (form.controls['filiere'].dirty ||
-        form.controls['filiere'].touched)) {
-        <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">au moins </span> un filiere.
+        @if (form.controls['filiere'].errors && (form.controls['filiere'].dirty
+        || form.controls['filiere'].touched)) {
+        <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+          <span class="font-medium">au moins </span> un filiere.
         </p>
         }
       </div>
       <div class="w-full mb-6">
         <label for="Filiere">Attacher</label>
         <div class="flex">
-          <input [ngClass]="{
-            'w-1/3  block rounded-lg border dark:border-none dark:bg-neutral-600 py-[3px] px-3 pr-4 text-sm focus:border-blue-400 focus:ring-1 focus:ring-blue-400 focus:outline-none' : true,
-            'bg-red-50 border border-red-500 text-red-900 placeholder-red-700': form.controls['attacher'].errors && (form.controls['attacher'].dirty || form.controls['attacher'].touched)
-          }" type="text" (keyup)="searchAttacher()" placeholder="search..." name="searchAttacher" id=""
+          <input
+            [ngClass]="{
+              'w-1/3  block rounded-lg border dark:border-none dark:bg-neutral-600 py-[3px] px-3 pr-4 text-sm focus:border-blue-400 focus:ring-1 focus:ring-blue-400 focus:outline-none': true,
+              'bg-red-50 border border-red-500 text-red-900 placeholder-red-700':
+                form.controls['attacher'].errors &&
+                (form.controls['attacher'].dirty ||
+                  form.controls['attacher'].touched)
+            }"
+            type="text"
+            (keyup)="searchAttacher()"
+            placeholder="search..."
+            name="searchAttacher"
+            id=""
             formControlName="searchAttacher"
-            class="w-1/3 block rounded-lg border dark:border-none dark:bg-neutral-600 py-[3px] px-3 pr-4 text-sm focus:border-blue-400 focus:ring-1 focus:ring-blue-400 focus:outline-none">
-          <ng-select [ngClass]="{
-            'w-full block rounded-lg border dark:border-none dark:bg-neutral-600 text-sm focus:border-blue-400 focus:ring-1 focus:ring-blue-400 focus:outline-none' : true,
-            'bg-red-50 border border-red-500 text-red-900 placeholder-red-700': form.controls['attacher'].errors && (form.controls['attacher'].dirty || form.controls['attacher'].touched)
-          }" id="attacher" name="attacher"  placeholder="attacher"
-            formControlName="attacher">
-            <ng-option *ngFor="let attacher of attacherSelect" [value]="attacher.id">{{attacher.nomComplet}}</ng-option>
+            class="w-1/3 block rounded-lg border dark:border-none dark:bg-neutral-600 py-[3px] px-3 pr-4 text-sm focus:border-blue-400 focus:ring-1 focus:ring-blue-400 focus:outline-none"
+          />
+          <ng-select
+            [ngClass]="{
+              'w-full block rounded-lg border dark:border-none dark:bg-neutral-600 text-sm focus:border-blue-400 focus:ring-1 focus:ring-blue-400 focus:outline-none': true,
+              'bg-red-50 border border-red-500 text-red-900 placeholder-red-700':
+                form.controls['attacher'].errors &&
+                (form.controls['attacher'].dirty ||
+                  form.controls['attacher'].touched)
+            }"
+            id="attacher"
+            name="attacher"
+            placeholder="attacher"
+            formControlName="attacher"
+          >
+            <ng-option
+              *ngFor="let attacher of attacherSelect"
+              [value]="attacher.id"
+              >{{ attacher.nomComplet }}</ng-option
+            >
           </ng-select>
         </div>
-        @if (form.controls['attacher'].errors && (form.controls['attacher'].dirty ||
-        form.controls['attacher'].touched)) {
-        <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">au moins </span> un attacher.
+        @if (form.controls['attacher'].errors &&
+        (form.controls['attacher'].dirty || form.controls['attacher'].touched))
+        {
+        <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+          <span class="font-medium">au moins </span> un attacher.
         </p>
         }
       </div>
       <div class="w-full mb-6">
         <label for="Niveau">Niveau</label>
         <div class="flex">
-          <input [ngClass]="{
-            'w-1/3  block rounded-lg border dark:border-none dark:bg-neutral-600 py-[3px] px-3 pr-4 text-sm focus:border-blue-400 focus:ring-1 focus:ring-blue-400 focus:outline-none' : true,
-            'bg-red-50 border border-red-500 text-red-900 placeholder-red-700': form.controls['niveau'].errors && (form.controls['niveau'].dirty || form.controls['niveau'].touched)
-          }" type="text" (keyup)="searchNiveau()" placeholder="search..." name="searchNiveau" id=""
+          <input
+            [ngClass]="{
+              'w-1/3  block rounded-lg border dark:border-none dark:bg-neutral-600 py-[3px] px-3 pr-4 text-sm focus:border-blue-400 focus:ring-1 focus:ring-blue-400 focus:outline-none': true,
+              'bg-red-50 border border-red-500 text-red-900 placeholder-red-700':
+                form.controls['niveau'].errors &&
+                (form.controls['niveau'].dirty ||
+                  form.controls['niveau'].touched)
+            }"
+            type="text"
+            (keyup)="searchNiveau()"
+            placeholder="search..."
+            name="searchNiveau"
+            id=""
             formControlName="searchNiveau"
-            class="w-1/3 block rounded-lg border dark:border-none dark:bg-neutral-600 py-[3px] px-3 pr-4 text-sm focus:border-blue-400 focus:ring-1 focus:ring-blue-400 focus:outline-none">
-          <ng-select [ngClass]="{
-            'w-full block rounded-lg border dark:border-none dark:bg-neutral-600 text-sm focus:border-blue-400 focus:ring-1 focus:ring-blue-400 focus:outline-none' : true,
-            'bg-red-50 border border-red-500 text-red-900 placeholder-red-700': form.controls['niveau'].errors && (form.controls['niveau'].dirty || form.controls['niveau'].touched)
-          }" id="niveau" name="niveau"  placeholder="niveau"
-            formControlName="niveau">
-            <ng-option *ngFor="let niveau of niveauSelect" [value]="niveau.id">{{niveau.libelle}}</ng-option>
+            class="w-1/3 block rounded-lg border dark:border-none dark:bg-neutral-600 py-[3px] px-3 pr-4 text-sm focus:border-blue-400 focus:ring-1 focus:ring-blue-400 focus:outline-none"
+          />
+          <ng-select
+            [ngClass]="{
+              'w-full block rounded-lg border dark:border-none dark:bg-neutral-600 text-sm focus:border-blue-400 focus:ring-1 focus:ring-blue-400 focus:outline-none': true,
+              'bg-red-50 border border-red-500 text-red-900 placeholder-red-700':
+                form.controls['niveau'].errors &&
+                (form.controls['niveau'].dirty ||
+                  form.controls['niveau'].touched)
+            }"
+            id="niveau"
+            name="niveau"
+            placeholder="niveau"
+            formControlName="niveau"
+            (change)="onChargeLibelle()"
+          >
+            <ng-option
+              *ngFor="let niveau of niveauSelect"
+              [value]="[niveau.id, niveau.libelle]"
+              >{{ niveau.libelle }}</ng-option
+            >
           </ng-select>
         </div>
         @if (form.controls['niveau'].errors && (form.controls['niveau'].dirty ||
         form.controls['niveau'].touched)) {
-        <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">au moins </span> un niveau.</p>
+        <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+          <span class="font-medium">au moins </span> un niveau.
+        </p>
         }
       </div>
       <div class="w-full mb-6">
         <label for="Annee Scolaire">Annee Scolaire</label>
         <div class="flex">
-          <input [ngClass]="{
-            'w-1/3  block rounded-lg border dark:border-none dark:bg-neutral-600 py-[3px] px-3 pr-4 text-sm focus:border-blue-400 focus:ring-1 focus:ring-blue-400 focus:outline-none' : true,
-            'bg-red-50 border border-red-500 text-red-900 placeholder-red-700': form.controls['anneeScolaire'].errors && (form.controls['anneeScolaire'].dirty || form.controls['anneeScolaire'].touched)
-          }" type="text" (keyup)="searchAnneeScolaire()" placeholder="search..." name="searchAnnee" id=""
+          <input
+            [ngClass]="{
+              'w-1/3  block rounded-lg border dark:border-none dark:bg-neutral-600 py-[3px] px-3 pr-4 text-sm focus:border-blue-400 focus:ring-1 focus:ring-blue-400 focus:outline-none': true,
+              'bg-red-50 border border-red-500 text-red-900 placeholder-red-700':
+                form.controls['anneeScolaire'].errors &&
+                (form.controls['anneeScolaire'].dirty ||
+                  form.controls['anneeScolaire'].touched)
+            }"
+            type="text"
+            (keyup)="searchAnneeScolaire()"
+            placeholder="search..."
+            name="searchAnnee"
+            id=""
             formControlName="searchAnnee"
-            class="w-1/3 block rounded-lg border dark:border-none dark:bg-neutral-600 py-[3px] px-3 pr-4 text-sm focus:border-blue-400 focus:ring-1 focus:ring-blue-400 focus:outline-none">
-          <ng-select [ngClass]="{
-            'w-full block rounded-lg border dark:border-none dark:bg-neutral-600 text-sm focus:border-blue-400 focus:ring-1 focus:ring-blue-400 focus:outline-none' : true,
-            'bg-red-50 border border-red-500 text-red-900 placeholder-red-700': form.controls['anneeScolaire'].errors && (form.controls['anneeScolaire'].dirty || form.controls['anneeScolaire'].touched)
-          }" id="anneeScolaire" name="anneeScolaire"
-            placeholder="anneeScolaire" formControlName="anneeScolaire">
-            <ng-option *ngFor="let anneeScolaire of anneeScolaireSelect"
-              [value]="anneeScolaire.id">{{anneeScolaire.libelle}}</ng-option>
+            class="w-1/3 block rounded-lg border dark:border-none dark:bg-neutral-600 py-[3px] px-3 pr-4 text-sm focus:border-blue-400 focus:ring-1 focus:ring-blue-400 focus:outline-none"
+          />
+          <ng-select
+            [ngClass]="{
+              'w-full block rounded-lg border dark:border-none dark:bg-neutral-600 text-sm focus:border-blue-400 focus:ring-1 focus:ring-blue-400 focus:outline-none': true,
+              'bg-red-50 border border-red-500 text-red-900 placeholder-red-700':
+                form.controls['anneeScolaire'].errors &&
+                (form.controls['anneeScolaire'].dirty ||
+                  form.controls['anneeScolaire'].touched)
+            }"
+            id="anneeScolaire"
+            name="anneeScolaire"
+            placeholder="anneeScolaire"
+            formControlName="anneeScolaire"
+          >
+            <ng-option
+              *ngFor="let anneeScolaire of anneeScolaireSelect"
+              [value]="anneeScolaire.id"
+              >{{ anneeScolaire.libelle }}</ng-option
+            >
           </ng-select>
         </div>
-        @if (form.controls['anneeScolaire'].errors && (form.controls['anneeScolaire'].dirty ||
+        @if (form.controls['anneeScolaire'].errors &&
+        (form.controls['anneeScolaire'].dirty ||
         form.controls['anneeScolaire'].touched)) {
-        <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">au moins </span> un
-          anneeScolaire.</p>
+        <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+          <span class="font-medium">au moins </span> un anneeScolaire.
+        </p>
+        }
+      </div>
+      <div class="mb-6">
+        <label
+          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          >Libelle</label
+        >
+        <input
+          formControlName="libelle"
+          type="text"
+          id="error"
+          [ngClass]="{
+            'text-sm rounded-lg w-full p-2.5 block': true,
+            'bg-red-50 border border-red-500 text-red-900 placeholder-red-700  focus:ring-red-500 dark:bg-gray-700 focus:border-red-500   dark:text-red-500 dark:placeholder-red-500 dark:border-red-500':
+              form.controls['libelle'].errors &&
+              (form.controls['libelle'].dirty ||
+                form.controls['libelle'].touched)
+          }"
+          placeholder="entrer le libelle"
+          name="libelle"
+          required
+        />
+        @if (form.controls['libelle'].errors && (form.controls['libelle'].dirty
+        || form.controls['libelle'].touched)) {
+        <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+          <span class="font-medium">le libelle</span> est obligatoire.
+        </p>
         }
       </div>
       <div class="">
-        <button type="button" [disabled]="form.invalid" (click)="onSubmit()"
-          class="float-right inline-block rounded disabled:bg-slate-400 hover:bg-orange-600 text-neutral-50 shadow-[0_4px_9px_-4px_rgba(51,45,45,0.7)]  hover:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] focus:bg-blue-800 focus:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] active:bg-blue-700 active:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] px-6 pb-2 pt-2.5  bg-orange-500 text-xs font-medium uppercase leading-normal transition duration-150 ease-in-out focus:outline-none focus:ring-0">enregistrer</button>
+        <button
+          type="button"
+          [disabled]="form.invalid"
+          (click)="onSubmit()"
+          class="float-right inline-block rounded disabled:bg-slate-400 hover:bg-orange-600 text-neutral-50 shadow-[0_4px_9px_-4px_rgba(51,45,45,0.7)] hover:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] focus:bg-blue-800 focus:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] active:bg-blue-700 active:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] px-6 pb-2 pt-2.5 bg-orange-500 text-xs font-medium uppercase leading-normal transition duration-150 ease-in-out focus:outline-none focus:ring-0"
+        >
+          enregistrer
+        </button>
       </div>
     </div>
   </form>

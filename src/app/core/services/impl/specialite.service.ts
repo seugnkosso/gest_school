@@ -12,6 +12,9 @@ import { SpecialiteService } from '../specialte.service';
 export class SpecialiteServiceImpl implements SpecialiteService {
   apiUrl = `${environment.APIURL}/specialites`;
   constructor(private http: HttpClient) { }
+  create(specialiteSelect: SpecialiteSelect): Observable<RestResponse<SpecialiteSelect>> {
+    return this.http.post<RestResponse<SpecialiteSelect>>(this.apiUrl, specialiteSelect)
+  }
   findAll(page: number = 0): Observable<RestResponse<SpecialiteSelect[]>> {
     return this.http.get<RestResponse<SpecialiteSelect[]>>(`${this.apiUrl}?page=${page}`);
   }

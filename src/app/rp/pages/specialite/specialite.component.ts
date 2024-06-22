@@ -15,7 +15,6 @@ import { DormSpecialiteComponent } from './dorm-specialite/dorm-specialite.compo
   styleUrl: './specialite.component.css',
 })
 export class SpecialiteComponent implements OnInit {
-
   response?: RestResponse<SpecialiteSelect[]>;
   dataPagination: PaginationModel = {
     pages: [],
@@ -48,6 +47,6 @@ export class SpecialiteComponent implements OnInit {
   }
   closeForm() {
     this.isFormClose = true;
-    }
+  }
   // FORM ADD OFF
 }

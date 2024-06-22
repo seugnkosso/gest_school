@@ -10,6 +10,6 @@ export interface SpecialiteListe {
 }
 
 export interface SpecialiteSelect {
-  id: number;
-  libelle: string;
+  id?: null;
+  libelle?: string | null;
 }

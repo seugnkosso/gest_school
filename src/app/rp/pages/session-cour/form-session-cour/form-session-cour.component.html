@@ -1,0 +1,121 @@
+<Section [ngClass]="{
+  'fixed flex flex-col border-2 rounded-lg border-slate-300 justify-center w-1/2 p-12 bg-white left-1/4 top-1/4':true,
+}">
+  <button (click)="closeForm()"
+    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 left-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
+    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd"
+        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+        clip-rule="evenodd"></path>
+    </svg>
+    <span class="sr-only">Close menu</span>
+  </button>
+
+  <form [formGroup]="form" (ngSubmit)="form.valid"
+    class="block text-left bg-white rounded-lg shadow-lg dark:bg-neutral-700">
+    <div class="py-3">
+      <div class="flex gap-2 p-3 border-2 rounded-lg border-slate-300">
+        <div class="w-full">
+          <label for="date">Date</label>
+          <input (change)="onChangeDate()" placeholder="Your email address" type="date" id="date" name="date" formControlName="date" [ngClass]="{
+            'text-sm rounded-lg w-full p-2.5 block' : true,
+            'bg-red-50 border border-red-500 text-red-900 placeholder-red-700  focus:ring-red-500 dark:bg-gray-700 focus:border-red-500   dark:text-red-500 dark:placeholder-red-500 dark:border-red-500':form.controls['date'].errors && (form.controls['date'].dirty || form.controls['date'].touched)
+          }" />
+          @if (form.controls['date'].errors && (form.controls['date'].dirty || form.controls['date'].touched)) {
+          <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">la date</span> est
+            obligatoire.</p>
+          }
+        </div>
+        <div class="w-full">
+          <label for="date">heure debut</label>
+          <input [readOnly]="form.controls['date'].errors" placeholder="Your email address" type="time" id="date"
+            name="heureDebut" formControlName="heureDebut" [ngClass]="{
+            'text-sm rounded-lg w-full p-2.5 block' : true,
+            'bg-red-50 border border-red-500 text-red-900 placeholder-red-700  focus:ring-red-500 dark:bg-gray-700 focus:border-red-500   dark:text-red-500 dark:placeholder-red-500 dark:border-red-500':form.controls['heureDebut'].errors && (form.controls['heureDebut'].dirty || form.controls['heureDebut'].touched)
+          }" (change)="onChangeHeureDebut()" />
+          @if (form.controls['heureDebut'].errors && (form.controls['heureDebut'].dirty ||
+          form.controls['heureDebut'].touched)) {
+          <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">heure debut </span> est
+            obligatoire.</p>
+          }
+        </div>
+        <div class="w-full">
+          <label for="date">heure fin</label>
+          <input (change)="onChangeHeureFin()"  [readOnly]="form.controls['heureDebut'].errors" placeholder="Your email address" type="time" id="date"
+            name="heureFin" formControlName="heureFin" [ngClass]="{
+            'text-sm rounded-lg w-full p-2.5 block' : true,
+            'bg-red-50 border border-red-500 text-red-900 placeholder-red-700  focus:ring-red-500 dark:bg-gray-700 focus:border-red-500   dark:text-red-500 dark:placeholder-red-500 dark:border-red-500':form.controls['heureFin'].errors && (form.controls['heureFin'].dirty || form.controls['heureFin'].touched)
+          }"
+           />
+          @if (form.controls['heureFin'].errors && (form.controls['heureFin'].dirty ||
+          form.controls['heureFin'].touched)) {
+          <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">heure fin </span> est
+            obligatoire.</p>
+          }
+        </div>
+      </div>
+      @if (isSessionClasseExists == true) {
+      <p class="pl-2 mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">une des classes a cour </span>
+        a cet heure.</p>
+      }
+      @if (isSessionProfExists == true) {
+      <p class="pl-2 mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">le professeur a cour </span> a
+        cet heure.</p>
+      }
+      @if(form.errors && (form.controls['heureFin'].dirty ||
+      form.controls['heureFin'].touched) ){
+        @if(form.errors['heureNotValid']){
+          <p class="pl-2 mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">l'heure de debut doit etre inferrireur </span> a
+            a l'heure de fin .</p>
+        }
+      }
+    </div>
+    <div class="py-3">
+      <div class="flex gap-2 p-3 border-2 rounded-lg border-slate-300">
+        <div class="w-full">
+          <label for="date">etat</label>
+          <select name="etat" id="" formControlName="etat" (change)="onChangeEtat()"
+          [ngClass]="{
+            'w-full block rounded-lg border dark:border-none dark:bg-neutral-600 text-sm focus:border-blue-400 focus:ring-1 focus:ring-blue-400 focus:outline-none' : true,
+            'bg-red-50 border border-red-500 text-red-900 placeholder-red-700': form.controls['salle'].errors && (form.controls['salle'].dirty || form.controls['salle'].touched)
+          }">
+            <option value="presentiel">presentiel</option>
+            <option value="en ligne">en ligne</option>
+          </select>
+          @if (form.controls['etat'].errors && (form.controls['etat'].dirty || form.controls['etat'].touched)) {
+            <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">l'etat</span> est
+              obligatoire.</p>
+            }
+        </div>
+        <div [hidden]="form.controls['etat'].value != 'presentiel' " class="w-full">
+          <div class="w-full">
+            <label for="salle">salle</label>
+            <div class="flex">
+              <input [readOnly]="form.controls['heureDebut'].errors" [ngClass]="{
+                'w-1/3  block rounded-lg border dark:border-none dark:bg-neutral-600 py-[3px] px-3 pr-4 text-sm focus:border-blue-400 focus:ring-1 focus:ring-blue-400 focus:outline-none' : true,
+                'bg-red-50 border border-red-500 text-red-900 placeholder-red-700': form.controls['salle'].errors && (form.controls['salle'].dirty || form.controls['salle'].touched)
+              }" type="text" (keyup)="searchSalle()" placeholder="search..." name="searchSalle" id=""
+                formControlName="searchSalle"
+                class="w-1/3 block rounded-lg border dark:border-none dark:bg-neutral-600 py-[3px] px-3 pr-4 text-sm focus:border-blue-400 focus:ring-1 focus:ring-blue-400 focus:outline-none">
+              <ng-select  [ngClass]="{
+                'w-full block rounded-lg border dark:border-none dark:bg-neutral-600 text-sm focus:border-blue-400 focus:ring-1 focus:ring-blue-400 focus:outline-none' : true,
+                'bg-red-50 border border-red-500 text-red-900 placeholder-red-700': form.controls['salle'].errors && (form.controls['salle'].dirty || form.controls['salle'].touched)
+              }" id="salle" name="salle" placeholder="salle"
+                formControlName="salle">
+                <ng-option *ngFor="let item of salleSelects" [value]="item.id">{{item.libelle}}</ng-option>
+              </ng-select>
+            </div>
+            @if (form.controls['salle'].errors && (form.controls['salle'].dirty || form.controls['salle'].touched)) {
+            <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">la salle</span> est
+              obligatoire.</p>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="">
+      <button type="button" (click)="onSubmit()" [disabled]="form.invalid || isSessionClasseExists || isSessionProfExists"
+        class="float-right m-3 inline-block rounded disabled:bg-slate-300 hover:bg-orange-600 text-neutral-50 shadow-[0_4px_9px_-4px_rgba(51,45,45,0.7)]  hover:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] focus:bg-blue-800 focus:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] active:bg-blue-700 active:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] px-6 pb-2 pt-2.5  bg-orange-500 text-xs font-medium uppercase leading-normal transition duration-150 ease-in-out focus:outline-none focus:ring-0">enregistrer</button>
+    </div>
+  </form>
+</Section>

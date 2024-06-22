@@ -6,6 +6,8 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
+import { SpecialiteServiceImpl } from '../../../../core/services/impl/specialite.service';
 
 @Component({
   selector: 'app-dorm-specialite',
@@ -20,11 +22,21 @@ export class DormSpecialiteComponent {
     id: [],
     libelle: ['', [Validators.required]],
   });
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private specService: SpecialiteServiceImpl,
+    private router: Router
+  ) {}
   closeForm() {
     this.onCloseForm.emit();
   }
   onSubmit() {
-    throw new Error('Method not implemented.');
+    const specialiteSelect = this.form.value;
+    this.specService.create(specialiteSelect).subscribe((data) => {
+      this.closeForm();
+      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+        this.router.navigate(['/RP/specialites']);
+      });
+    });
   }
 }
