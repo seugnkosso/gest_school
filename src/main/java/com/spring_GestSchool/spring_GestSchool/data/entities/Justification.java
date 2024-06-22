@@ -15,7 +15,7 @@ import java.util.Date;
 public class Justification {
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date date;
+    private Date date ;
     private String motif;
     private Boolean isvalider = false;
 }

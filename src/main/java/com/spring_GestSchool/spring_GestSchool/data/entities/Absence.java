@@ -14,14 +14,9 @@ import lombok.NoArgsConstructor;
 public class Absence extends AbstractEntity {
     @Embedded
     private Justification justication;
-
     @ManyToOne
     private Etudiant etudiant;
-
     @ManyToOne
     private SessionCour sessionCour;
 
-    public void affiche() {
-        System.out.println("ok");
-    }
 }
