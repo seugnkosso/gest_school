@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="core/template/baseTemplate"
+>
+<head>
+    <meta charset="UTF-8">
+    <title layout:fragment="title">professeur</title>
+</head>
+<body>
+<div class="" layout:fragment="content">
+    <section class="">
+        <!-- Table responsive wrapper -->
+        <div class="overflow-x-auto bg-white dark:bg-neutral-700">
+            <!-- Search input -->
+            <form th:action="@{/professeurs}">
+
+                <div class="relative m-[2px] mb-3 mr-5 float-left">
+                    <label for="inputSearch" class="sr-only">Search </label>
+                    <input name="tel" id="inputSearch"  type="text" placeholder="Search..."
+                           class="block w-64 rounded-lg border dark:border-none dark:bg-neutral-600 py-2 pl-10 pr-4 text-sm focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-400"/>
+                    <span class="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 transform">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+           class="h-4 w-4 text-neutral-500 dark:text-neutral-200">
+        <path stroke-linecap="round" stroke-linejoin="round"
+              d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/>
+      </svg>
+    </span>
+                </div>
+            </form>
+
+
+            <!-- Table -->
+            <table class="min-w-full text-left text-sm whitespace-nowrap">
+
+                <!-- Table head -->
+                <thead class="uppercase tracking-wider bg-orange-400 dark:bg-neutral-800">
+                <tr>
+                    <th scope="col" class="px-6 py-4">
+                        nom et prenom
+                    </th>
+                    <th scope="col" class="px-6 py-4">
+                        telephone
+                    </th>
+                    <th scope="col" class="px-6 py-4">
+                        email
+                    </th>
+                    <th scope="col" class="px-6 py-4">
+                        grades
+                    </th>
+                    <th scope="col" class="px-6 py-4">
+                        specialité
+                    </th>
+                    <th scope="col" class="px-6 py-4 text-right">
+                    </th>
+                </tr>
+                </thead>
+
+                <!-- Table body -->
+                <tbody>
+
+                <tr th:each="p:${professeurs}" class="hover:bg-neutral-100 dark:hover:bg-neutral-600">
+                    <th scope="row" class="px-6 py-4" th:text="${p.getNomComplet()}"></th>
+                    <td class="px-6 py-4" th:text="${p.getTelephone()}"></td>
+                    <td class="px-6 py-4" th:text="${p.getEmail()}"></td>
+                    <td class="px-6 py-4" th:text="${p.getGrade()}"></td>
+                    <td class="px-6 py-4" th:text="${p.getSpecialite()}"></td>
+                    <td class="px-6 py-4 gap-2 flex justify-end">
+                        <a role="button"
+                           th:href="@{/sessionCours/professeur/{idProf}(idProf=${p.getId()})}"
+                           class="inline-block rounded bg-orange-500 text-neutral-50 shadow-[0_4px_9px_-4px_rgba(51,45,45,0.7)] hover:bg-orange-600 hover:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] focus:bg-orange-800 focus:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] active:bg-orange-700 active:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal transition duration-150 ease-in-out focus:outline-none focus:ring-0">session</a>
+                    </td>
+                </tr>
+
+                </tbody>
+
+            </table>
+
+            <nav class="mt-5 flex items-center justify-between text-sm" aria-label="Page navigation example">
+                <p>
+                    Showing <strong>1-5</strong> of <strong>10</strong>
+                </p>
+
+                <ul class="list-style-none flex">
+                    <li>
+                        <a
+                                class="relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 dark:text-white dark:hover:bg-neutral-700 dark:hover:text-white"
+                                href="#!"
+                        >
+                            Previous
+                        </a>
+                    </li>
+                    <li th:each="p,i:${pages}">
+                        <a
+                                class="relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 dark:text-white dark:hover:bg-neutral-700 dark:hover:text-white"
+                                th:href="@{/professeurs(page=${i.index})}"
+                                th:text="${i.index + 1}"
+                        >
+
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                                class="relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 dark:text-white dark:hover:bg-neutral-700 dark:hover:text-white"
+                                href="#!"
+                        >
+                            Next
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+        </div>
+    </section>
+</div>
+</body>
+</html>

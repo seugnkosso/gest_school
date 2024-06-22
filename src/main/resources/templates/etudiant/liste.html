@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="core/template/baseTemplate"
+>
+<head>
+    <meta charset="UTF-8">
+    <title layout:fragment="title">etudiant</title>
+</head>
+<body>
+<div class="" layout:fragment="content">
+    <section class="">
+        <!-- Table responsive wrapper -->
+        <div class="overflow-x-auto bg-white dark:bg-neutral-700">
+
+
+            <form th:action="@{/absents}" th:object="${absentsForm}" method="post">
+                <!-- Table -->
+                <table class="min-w-full text-left text-sm whitespace-nowrap">
+
+                    <!-- Table head -->
+                    <thead class="uppercase tracking-wider bg-orange-400 dark:bg-neutral-800">
+                    <tr>
+                        <th scope="col" class="px-6 py-4">
+                            matricule
+                        </th>
+                        <th scope="col" class="px-6 py-4">
+                            nom et prenom
+                        </th>
+                        <th scope="col" class="px-6 py-4">
+                            telephone
+                        </th>
+                        <th scope="col" class="px-6 py-4">
+
+                        </th>
+                    </tr>
+                    </thead>
+
+                    <!-- Table body -->
+                    <tbody>
+                    <tr th:each="et:${datas}" class="hover:bg-neutral-100 dark:hover:bg-neutral-600">
+                        <th scope="row" class="px-6 py-4" th:text="${et.getMatricule()}"></th>
+                        <th scope="row" class="px-6 py-4" th:text="${et.getNomComplet()}"></th>
+                        <th scope="row" class="px-6 py-4" th:text="${et.getTelephone()}"></th>
+                        <td class="px-6 py-4 gap-2 flex justify-end">
+                            <input type="hidden" th:value="*{idSession}" th:field="*{idSession}"/>
+                            <input th:if="${et.absenceNote == false }" th:field="*{idEtudiant}" th:value="${et.getId()}"
+                                   type="checkbox"/>
+                            <p th:if="${et.absenceNote == true }">absent</p>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <button type="submit"
+                        class="float-right inline-block rounded bg-blue-500 text-neutral-50 shadow-[0_4px_9px_-4px_rgba(51,45,45,0.7)] hover:bg-blue-600 hover:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] focus:bg-blue-800 focus:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] active:bg-blue-700 active:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal transition duration-150 ease-in-out focus:outline-none focus:ring-0">
+                    enregistrer
+                </button>
+            </form>
+        </div>
+    </section>
+</div>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="core/template/baseTemplate"
+>
+<head>
+    <meta charset="UTF-8">
+    <title layout:fragment="title">session cour</title>
+</head>
+<body>
+<div class="" layout:fragment="content">
+    <section class="">
+        <!-- Table responsive wrapper -->
+        <div class="overflow-x-auto bg-white dark:bg-neutral-700">
+
+
+            <!-- Table -->
+            <table class="min-w-full text-left text-sm whitespace-nowrap">
+
+                <!-- Table head -->
+                <thead class="uppercase tracking-wider bg-orange-400 dark:bg-neutral-800">
+                <tr>
+                    <th scope="col" class="px-6 py-4">
+                        date | heure debut | heure fin
+                    </th>
+                    <th scope="col" class="px-6 py-4">
+                        etat
+                    </th>
+                    <th scope="col" class="px-6 py-4">
+                        salle
+                    </th>
+                    <th scope="col" class="px-6 py-4">
+                        module
+                    </th>
+                    <th scope="col" class="px-6 py-4 text-right">
+                    </th>
+                </tr>
+                </thead>
+
+                <!-- Table body -->
+                <tbody>
+
+                <tr th:each="s:${datas}" class="hover:bg-neutral-100 dark:hover:bg-neutral-600">
+                    <th scope="row" class="px-6 py-4" th:text="${s.getDate()}"></th>
+                    <th scope="row" class="px-6 py-4" th:text="${s.getEtat()}"></th>
+                    <td class="px-6 py-4" th:text="${s.getSalle()}"></td>
+                    <td class="px-6 py-4" th:text="${s.getModule()}"></td>
+                    <td class="px-6 py-4 gap-2 flex justify-end">
+                        <a role="button"
+                           th:href="@{/sessionCours/valider/{idSession}/{idP}(idSession=${s.getId()},idP=${idProf})}"
+                           th:if="${s.getIsValider == false}"
+                           class="inline-block rounded bg-orange-500 text-neutral-50 shadow-[0_4px_9px_-4px_rgba(51,45,45,0.7)] hover:bg-orange-600 hover:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] focus:bg-orange-800 focus:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] active:bg-orange-700 active:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal transition duration-150 ease-in-out focus:outline-none focus:ring-0">valider</a>
+                        <a th:href="@{/etudiants/sessionCour/{idSessionCour}(idSessionCour=${s.getId()})}"
+                           class="inline-block rounded bg-teal-500 text-neutral-50 shadow-[0_4px_9px_-4px_rgba(51,45,45,0.7)] hover:bg-teal-600 hover:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] focus:bg-teal-800 focus:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] active:bg-teal-700 active:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal transition duration-150 ease-in-out focus:outline-none focus:ring-0">présences</a>
+                    </td>
+                </tr>
+
+                </tbody>
+
+            </table>
+
+            <nav class="mt-5 flex items-center justify-between text-sm" aria-label="Page navigation example">
+                <p>
+                    Showing <strong>1-5</strong> of <strong>10</strong>
+                </p>
+
+                <ul class="list-style-none flex">
+                    <li>
+                        <a
+                                class="relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 dark:text-white dark:hover:bg-neutral-700 dark:hover:text-white"
+                                href="#!"
+                        >
+                            Previous
+                        </a>
+                    </li>
+                    <li th:each="p,i:${pages}">
+                        <a
+                                class="relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 dark:text-white dark:hover:bg-neutral-700 dark:hover:text-white"
+                                th:href="@{/sessionCours/professeur/{idP}(idP=${idProf},page=${i.index})}"
+                                th:text="${i.index + 1}"
+                        >
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                                class="relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 dark:text-white dark:hover:bg-neutral-700 dark:hover:text-white"
+                                href="#!"
+                        >
+                            Next
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+        </div>
+    </section>
+</div>
+</body>
+</html>

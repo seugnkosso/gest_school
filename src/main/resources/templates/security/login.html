@@ -1,0 +1,21 @@
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>connectez vous</title>
+</head>
+<body style="width: 50%; margin: 0 auto; margin-top: 15rem; ">
+<h1>Connexion</h1>
+<div th:if="${param.error}" style="color: red; padding: 0.5rem; margin: 0.2rem 0 ;">
+    address ou mot de passe incorrect.</div>
+<div th:if="${param.logout}">
+    vous ete déconnecter.</div>
+<form style="width: 100%;" th:action="@{/login}" method="post">
+    <div style="width: 100%; display: block;">
+        <input style="width: 100%; padding: 0.5rem; margin: 0.2rem 0 ;" name="username" placeholder="Username"/>
+    </div>
+    <div style="width: 100%; display: block;">
+        <input style="width: 100%; padding: 0.5rem; margin: 0.2rem 0 ;" type="password" name="password" placeholder="Password"/>
+    </div>
+    <input class="bg-orange-950" style="padding: 0.5rem; margin: 0.2rem 0 ;" type="submit" value="connecter" />
+</form>
+</body>
+</html>

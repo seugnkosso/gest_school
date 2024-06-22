@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="core/template/baseTemplate"
+>
+<head>
+    <meta charset="UTF-8">
+    <title layout:fragment="title">justification</title>
+</head>
+<body>
+<div class="" layout:fragment="content">
+    <section class="">
+        <!-- Table responsive wrapper -->
+        <div class="overflow-x-auto bg-white dark:bg-neutral-700">
+
+            <!-- Search input -->
+            <form class="flex">
+                <div class="relative m-[2px] mb-3 mr-5 float-left">
+                </div>
+                <div>
+                </div>
+            </form>
+
+            <!-- Table -->
+            <table class="min-w-full text-left text-sm whitespace-nowrap">
+
+                <!-- Table head -->
+                <thead class="uppercase tracking-wider bg-orange-400 dark:bg-neutral-800">
+                <tr>
+                    <th scope="col" class="px-6 py-4">
+                        date
+                    </th>
+                    <th scope="col" class="px-6 py-4">
+                        motif
+                    </th>
+                    <th scope="col" class="px-6 py-4">
+                        etudiant
+                    </th>
+                    <th scope="col" class="px-6 py-4 text-right">
+                    </th>
+                </tr>
+                </thead>
+
+                <!-- Table body -->
+                <tbody>
+                <tr th:each="d:${datas}" class="hover:bg-neutral-100 dark:hover:bg-neutral-600">
+                    <th scope="row" class="px-6 py-4" th:text="${d.getDate()}"></th>
+                    <td class="px-6 py-4" th:text="${d.getMotif()}"></td>
+                    <td class="px-6 py-4" th:text="${d.getEtudiant()}"></td>
+                    <td class="px-6 py-4 gap-2 flex justify-end">
+                        <a th:href="@{/absence/justification/valider(idAbsence=${d.getIdAbsence()})}" role="button"
+                           class="inline-block rounded bg-orange-500 text-neutral-50 shadow-[0_4px_9px_-4px_rgba(51,45,45,0.7)] hover:bg-orange-600 hover:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] focus:bg-orange-800 focus:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] active:bg-orange-700 active:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal transition duration-150 ease-in-out focus:outline-none focus:ring-0">accepter
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+
+            </table>
+
+            <nav class="mt-5 flex items-center justify-between text-sm" aria-label="Page navigation example">
+                <p>
+                    Showing <strong>1-5</strong> of <strong>10</strong>
+                </p>
+
+                <ul class="list-style-none flex">
+                    <li>
+                        <a
+                                class="relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 dark:text-white dark:hover:bg-neutral-700 dark:hover:text-white"
+                                href="#!"
+                        >
+                            Previous
+                        </a>
+                    </li>
+                    <li th:each="p:${pages}">
+                        <a
+                                class="relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 dark:text-white dark:hover:bg-neutral-700 dark:hover:text-white"
+                                th:href="@{/absence/nonJustifier(page=${p})}"
+                                th:text="${p+1}"
+                        >
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                                class="relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 dark:text-white dark:hover:bg-neutral-700 dark:hover:text-white"
+                                href="#!"
+                        >
+                            Next
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+        </div>
+    </section>
+</div>
+</body>
+</html>
