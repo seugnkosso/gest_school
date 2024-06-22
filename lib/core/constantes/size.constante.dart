@@ -1,0 +1,1 @@
+const paddingConstante = 20;
