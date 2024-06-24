@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:gest_school_fluter/core/components/custum_text_form.dart';
 import 'package:gest_school_fluter/core/modals/login_model.dart';
 import 'package:gest_school_fluter/core/services/security_service.dart';
-import 'package:gest_school_fluter/pagss/home/home.page.dart';
+import 'package:gest_school_fluter/pagss/attacher/attacher_scanner_page.dart';
+import 'package:gest_school_fluter/pagss/etudiant/home/home.page.dart';
 
 class LoginOrResgister extends StatefulWidget {
   static String routeName = "/loginOrResgister";
@@ -55,7 +56,7 @@ class _LoginOrResgisterState extends State<LoginOrResgister> {
                                     style: TextStyle(
                                         color:
                                             Color.fromARGB(255, 126, 102, 14),
-                                        fontSize: 25.5,
+                                        fontSize: 20,
                                         fontWeight: FontWeight.bold),
                                   ),
                                   const SizedBox(
@@ -116,9 +117,24 @@ class _LoginOrResgisterState extends State<LoginOrResgister> {
                                           );
                                           if (SecurityService.userConnect !=
                                               null) {
-                                            Navigator.pop(context);
-                                            Navigator.pushNamed(
-                                                context, HomePage.routeName);
+                                            if (SecurityService
+                                                .userConnect!.roles
+                                                .contains("Etudiant")) {
+                                              Navigator.pop(context);
+                                              Navigator.pushNamed(
+                                                  context, HomePage.routeName);
+                                            } else if (SecurityService
+                                                .userConnect!.roles
+                                                .contains("Attacher")) {
+                                              Navigator.pop(context);
+                                              Navigator.pushNamed(context,
+                                                  ScannerPage.routeName);
+                                            } else {
+                                              setState(() {
+                                                errorMessage =
+                                                    "vous n'avez les droits";
+                                              });
+                                            }
                                           } else {
                                             setState(() {
                                               errorMessage =

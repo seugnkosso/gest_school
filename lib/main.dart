@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:gest_school_fluter/pagss/absence/absence.page.dart';
-import 'package:gest_school_fluter/pagss/absence/justification_page.dart';
-import 'package:gest_school_fluter/pagss/home/home.page.dart';
+import 'package:gest_school_fluter/pagss/attacher/attacher_scanner_page.dart';
+import 'package:gest_school_fluter/pagss/etudiant/absence/absence.page.dart';
+import 'package:gest_school_fluter/pagss/etudiant/absence/justification_page.dart';
+import 'package:gest_school_fluter/pagss/etudiant/home/home.page.dart';
+import 'package:gest_school_fluter/pagss/etudiant/sessionCour/emargement_page.dart';
+import 'package:gest_school_fluter/pagss/etudiant/sessionCour/sessionCour.page.dart';
 import 'package:gest_school_fluter/pagss/login/login.page.dart';
-import 'package:gest_school_fluter/pagss/sessionCour/emargement_page.dart';
-import 'package:gest_school_fluter/pagss/sessionCour/sessionCour.page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
           '/justification': (context) => const JustificationPage(),
           '/loginOrResgister': (context) => const LoginOrResgister(),
           '/emargementPage': (context) => const Emargementpage(),
+          '/scannerPage': (context) => const ScannerPage(),
         },
         home: const LoginOrResgister());
   }

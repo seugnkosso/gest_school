@@ -7,7 +7,7 @@ class LoginResponseModel {
   final int id;
   final String token;
   final String username;
-  final List<String> roles;
+  final List<dynamic> roles;
   LoginResponseModel({
     required this.id,
     required this.token,
@@ -43,7 +43,7 @@ class LoginResponseModel {
       id: map['id'] as int,
       token: map['token'] as String,
       username: map['username'] as String,
-      roles: [],
+      roles: List<dynamic>.from((map['roles'] as List<dynamic>)),
       // List<String>.from((map['roles'] as List<String>),
     );
   }

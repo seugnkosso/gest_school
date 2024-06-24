@@ -3,7 +3,7 @@ import 'package:gest_school_fluter/core/components/widget.appBar.dart';
 import 'package:gest_school_fluter/core/components/widget.drawer.dart';
 import 'package:gest_school_fluter/core/modals/sessionCour.modal.dart';
 import 'package:gest_school_fluter/core/services/sessionCour.service.dart';
-import 'package:gest_school_fluter/pagss/sessionCour/components/sessionCour.list.dart';
+import 'package:gest_school_fluter/pagss/etudiant/sessionCour/components/sessionCour.list.dart';
 
 class SessionCourPage extends StatelessWidget {
   static String routeName = "/sessionCour";

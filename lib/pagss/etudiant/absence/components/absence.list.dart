@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gest_school_fluter/core/modals/absence.modal.dart';
 import 'package:gest_school_fluter/core/services/security_service.dart';
-import 'package:gest_school_fluter/pagss/absence/justification_page.dart';
+import 'package:gest_school_fluter/pagss/etudiant/absence/justification_page.dart';
 // import 'package:gest_school_fluter/pagss/absence/justification_page.dart';
 
 class AbsenceList extends StatelessWidget {
@@ -86,7 +86,7 @@ class AbsenceItem extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(6.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -110,7 +110,7 @@ class AbsenceItem extends StatelessWidget {
                       child: const Text(
                         'justifier',
                         style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.w700),
+                            fontSize: 15, fontWeight: FontWeight.w700),
                       ),
                     ),
                 ],

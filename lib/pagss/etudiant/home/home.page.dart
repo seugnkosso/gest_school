@@ -3,7 +3,7 @@ import 'package:gest_school_fluter/core/components/widget.appBar.dart';
 import 'package:gest_school_fluter/core/components/widget.drawer.dart';
 import 'package:gest_school_fluter/core/modals/cour.modal.dart';
 import 'package:gest_school_fluter/core/services/cour.service.dart';
-import 'package:gest_school_fluter/pagss/home/components/cour.liste.dart';
+import 'package:gest_school_fluter/pagss/etudiant/home/components/cour.liste.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});

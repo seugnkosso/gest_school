@@ -4,7 +4,7 @@ import 'package:gest_school_fluter/core/components/widget.appBar.dart';
 import 'package:gest_school_fluter/core/components/widget.drawer.dart';
 import 'package:gest_school_fluter/core/modals/justication.model.dart';
 import 'package:gest_school_fluter/core/services/absence.service.dart';
-import 'package:gest_school_fluter/pagss/absence/absence.page.dart';
+import 'package:gest_school_fluter/pagss/etudiant/absence/absence.page.dart';
 
 class JustificationPage extends StatefulWidget {
   static String routeName = '/justification';

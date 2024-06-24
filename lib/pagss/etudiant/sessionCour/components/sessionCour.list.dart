@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gest_school_fluter/core/modals/sessionCour.modal.dart';
-import 'package:gest_school_fluter/pagss/sessionCour/emargement_page.dart';
+import 'package:gest_school_fluter/pagss/etudiant/sessionCour/emargement_page.dart';
 
 class listSessionCour extends StatelessWidget {
   Future<List<SessionCour>> sessionCours;
