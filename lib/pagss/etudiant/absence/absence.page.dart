@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gest_school_fluter/core/components/widget.appBar.dart';
 import 'package:gest_school_fluter/core/components/widget.drawer.dart';
-import 'package:gest_school_fluter/core/modals/absence.modal.dart';
+import 'package:gest_school_fluter/core/models/absence.modal.dart';
 import 'package:gest_school_fluter/core/services/absence.service.dart';
 import 'package:gest_school_fluter/pagss/etudiant/absence/components/absence.list.dart';
 

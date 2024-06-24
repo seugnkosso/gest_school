@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gest_school_fluter/core/modals/absence.modal.dart';
+import 'package:gest_school_fluter/core/models/absence.modal.dart';
 import 'package:gest_school_fluter/core/services/security_service.dart';
 import 'package:gest_school_fluter/pagss/etudiant/absence/justification_page.dart';
 // import 'package:gest_school_fluter/pagss/absence/justification_page.dart';

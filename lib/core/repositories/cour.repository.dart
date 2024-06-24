@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:gest_school_fluter/core/constantes/api.constante.dart';
-import 'package:gest_school_fluter/core/modals/cour.modal.dart';
+import 'package:gest_school_fluter/core/models/cour.modal.dart';
 import 'package:gest_school_fluter/core/services/security_service.dart';
 
 class CourRepository {

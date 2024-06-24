@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gest_school_fluter/core/components/widget.appBar.dart';
 import 'package:gest_school_fluter/core/components/widget.drawer.dart';
-// import 'package:qr_bar_code_scanner_dialog/qr_bar_code_scanner_dialog.dart';
 
 class ScannerPage extends StatefulWidget {
   const ScannerPage({super.key});
@@ -11,8 +10,6 @@ class ScannerPage extends StatefulWidget {
 }
 
 class _ScannerPageState extends State<ScannerPage> {
-  // final _qrBarCodeScannerDialogPlugin = QrBarCodeScannerDialog();
-  String? code;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,16 +27,8 @@ class _ScannerPageState extends State<ScannerPage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 ElevatedButton(
-                  onPressed: () {
-                    // _qrBarCodeScannerDialogPlugin.getScannedQrBarCode(
-                    //     context: context,
-                    //     onCode: (code) {
-                    //       setState(() {
-                    //         this.code = code;
-                    //       });
-                    //     });
-                  },
-                  child: Text(code ?? "Click me"),
+                  onPressed: () {},
+                  child: Text("Click me"),
                 ),
               ],
             ),

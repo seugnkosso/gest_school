@@ -1,4 +1,4 @@
-import 'package:gest_school_fluter/core/modals/cour.modal.dart';
+import 'package:gest_school_fluter/core/models/cour.modal.dart';
 import 'package:gest_school_fluter/core/repositories/cour.repository.dart';
 
 class CourService {

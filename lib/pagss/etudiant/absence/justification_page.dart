@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gest_school_fluter/core/components/custum_text_form.dart';
 import 'package:gest_school_fluter/core/components/widget.appBar.dart';
 import 'package:gest_school_fluter/core/components/widget.drawer.dart';
-import 'package:gest_school_fluter/core/modals/justication.model.dart';
+import 'package:gest_school_fluter/core/models/justication.model.dart';
 import 'package:gest_school_fluter/core/services/absence.service.dart';
 import 'package:gest_school_fluter/pagss/etudiant/absence/absence.page.dart';
 

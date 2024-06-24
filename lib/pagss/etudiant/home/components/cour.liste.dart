@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gest_school_fluter/core/modals/cour.modal.dart';
+import 'package:gest_school_fluter/core/models/cour.modal.dart';
 import 'package:gest_school_fluter/pagss/etudiant/sessionCour/sessionCour.page.dart';
 
 class CourList extends StatelessWidget {

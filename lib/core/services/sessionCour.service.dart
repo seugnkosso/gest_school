@@ -1,4 +1,4 @@
-import 'package:gest_school_fluter/core/modals/sessionCour.modal.dart';
+import 'package:gest_school_fluter/core/models/sessionCour.modal.dart';
 import 'package:gest_school_fluter/core/repositories/sessionCour.repository.dart';
 
 class SessionCourService {

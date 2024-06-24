@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:gest_school_fluter/core/constantes/api.constante.dart';
-import 'package:gest_school_fluter/core/modals/sessionCour.modal.dart';
+import 'package:gest_school_fluter/core/models/sessionCour.modal.dart';
 
 class SessionCourRepository {
   static const url = "$APIURL/sessionCours";

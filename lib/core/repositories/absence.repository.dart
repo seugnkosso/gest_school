@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:gest_school_fluter/core/constantes/api.constante.dart';
-import 'package:gest_school_fluter/core/modals/absence.modal.dart';
-import 'package:gest_school_fluter/core/modals/justication.model.dart';
+import 'package:gest_school_fluter/core/models/absence.modal.dart';
+import 'package:gest_school_fluter/core/models/justication.model.dart';
 import 'package:gest_school_fluter/core/services/security_service.dart';
 
 class AbsenceRepository {

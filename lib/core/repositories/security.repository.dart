@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:gest_school_fluter/core/constantes/api.constante.dart';
-import 'package:gest_school_fluter/core/modals/login_model.dart';
-import 'package:gest_school_fluter/core/modals/login_response_model.dart';
+import 'package:gest_school_fluter/core/models/login_model.dart';
+import 'package:gest_school_fluter/core/models/login_response_model.dart';
 
 class SecurityRepository {
   static const url = "$APIURL/login";

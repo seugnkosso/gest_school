@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gest_school_fluter/core/components/widget.appBar.dart';
 import 'package:gest_school_fluter/core/components/widget.drawer.dart';
-import 'package:gest_school_fluter/core/modals/cour.modal.dart';
+import 'package:gest_school_fluter/core/models/cour.modal.dart';
 import 'package:gest_school_fluter/core/services/cour.service.dart';
 import 'package:gest_school_fluter/pagss/etudiant/home/components/cour.liste.dart';
 

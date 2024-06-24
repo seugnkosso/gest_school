@@ -1,5 +1,5 @@
-import 'package:gest_school_fluter/core/modals/absence.modal.dart';
-import 'package:gest_school_fluter/core/modals/justication.model.dart';
+import 'package:gest_school_fluter/core/models/absence.modal.dart';
+import 'package:gest_school_fluter/core/models/justication.model.dart';
 import 'package:gest_school_fluter/core/repositories/absence.repository.dart';
 
 class AbsenceService {

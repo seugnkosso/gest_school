@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gest_school_fluter/core/components/custum_text_form.dart';
-import 'package:gest_school_fluter/core/modals/login_model.dart';
+import 'package:gest_school_fluter/core/models/login_model.dart';
 import 'package:gest_school_fluter/core/services/security_service.dart';
 import 'package:gest_school_fluter/pagss/attacher/attacher_scanner_page.dart';
 import 'package:gest_school_fluter/pagss/etudiant/home/home.page.dart';
